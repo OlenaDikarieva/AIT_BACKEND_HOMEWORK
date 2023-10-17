@@ -19,6 +19,7 @@ public class UserRegistration {
 
         UsersService usersService = new UsersServiceImpl(repository);
         UsersController usersController = new UsersController(scanner, usersService);
+        usersController.addUser();
     }
 
 
