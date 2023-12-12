@@ -9,6 +9,7 @@ import org.demointernetshop.entity.Cart;
 import org.demointernetshop.entity.CartItem;
 import org.demointernetshop.entity.Product;
 import org.demointernetshop.entity.User;
+import org.demointernetshop.repository.CartItemRepository;
 import org.demointernetshop.repository.CartRepository;
 import org.demointernetshop.services.utils.Converters;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Service;
 public class CartService {
 
     private final CartRepository cartRepository;
+    private final CartItemRepository cartItemRepository;
+
     private final ProductService productService; // Assuming you have a ProductService
 
     public CartDto getCart(Integer userId) {
@@ -32,12 +35,10 @@ public class CartService {
                 .orElseGet(() -> {
                     User user = new User();
                     user.setId(userId);
-
                     Cart newCart = new Cart();
                     newCart.setUser(user);
                     return cartRepository.save(newCart);
                 });
-
         Product product = productService.getProductById(request.getProduct_id());
         CartItem cartItem = cart.getCartItems().stream()
                 .filter(item -> item.getProduct().getId().equals(request.getProduct_id()))

@@ -79,5 +79,10 @@ public class UserService {
         // Convert User entity to UserDto and return
         return Converters.entityToDto(user);
     }
+    public User findById(Integer id){
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found for user id: " + id));
+    }
+
 
 }

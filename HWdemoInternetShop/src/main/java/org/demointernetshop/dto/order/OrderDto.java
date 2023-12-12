@@ -25,7 +25,7 @@ public class OrderDto {
     @Schema(description = "Status of order", example = "delivered")
     private String orderStatus;
     @Schema(description = "Status of payment", example = "paid")
-    private String payment_status;
+    private String paymentStatus;
     @Schema(description = "Status of payment method", example = "paypal")
     private String paymentMethod;
     @Schema(description = "The date and time when the object was created", example = "2023-12-01T15:30:45")

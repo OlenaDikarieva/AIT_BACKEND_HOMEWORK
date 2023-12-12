@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.demointernetshop.entity.Manufacturer;
 
 @Data
 @AllArgsConstructor
@@ -20,4 +21,9 @@ public class ManufacturerDto {
 
     @Schema(description = "Country of the manufacturer", example = "USA")
     private String country;
+
+    public static ManufacturerDto from(Manufacturer manufacturer) {
+        return new ManufacturerDto(manufacturer.getId(), manufacturer.getName(),
+                manufacturer.getCountry());
+    }
 }

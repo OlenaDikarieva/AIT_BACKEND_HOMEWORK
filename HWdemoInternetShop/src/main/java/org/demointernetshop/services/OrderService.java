@@ -27,25 +27,28 @@ public class OrderService {
     private final OrderStatusService orderStatusService; // OrderStatusService
     private final PaymentMethodService paymentMethodService; //  PaymentMethodService
     private final PaymentStatusService paymentStatusService; // PaymentStatusService
-
+    private final UserService userService;
 
     //todo:OrderStatusService,PaymentMethodService,PaymentStatusService
     public OrderDto createOrder(Integer cartId, OrderRequestDto request) {
         CartDto cartDto = cartService.getCart(cartId);
+        /* Assuming the User ID is provided in the request
         User user = new User();
-        user.setId(request.getUserId()); // Assuming the User ID is provided in the request
+        user.setId(request.getUserId()); */
+        User user = userService.findById(request.getUserId());
 
         Order order = new Order();
         order.setUser(user);
         order.setOrderItems(convertCartItemsToOrderItems(cartDto.getProducts(), order));
         order.setTotalAmount(calculateTotalAmount(cartDto.getProducts()));
 
-        // orderStatusService.getOrderStatusByName("pending")
-        order.setOrderStatus("pending"); // Set default status
-       // paymentMethodService.getPaymentMethodByName("default")
-        order.setPaymentMethod("default"); // Set default method
-        //paymentStatusService.getPaymentStatusByName("unpaid")
-        order.setPaymentStatus("unpaid"); // Set default status
+        // Set default status
+        order.setOrderStatus(orderStatusService.getOrderStatusByName("pending"));
+        // Set default method
+        order.setPaymentMethod( paymentMethodService.getPaymentMethodByName("default"));
+        // Set default status
+        order.setPaymentStatus(paymentStatusService.getPaymentStatusByName("unpaid"));
+
         order.setCreateData(LocalDateTime.now());
 
         Order savedOrder = orderRepository.save(order);

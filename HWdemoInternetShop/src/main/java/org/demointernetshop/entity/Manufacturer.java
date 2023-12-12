@@ -21,5 +21,15 @@ public class Manufacturer {
     @OneToMany(mappedBy = "manufacturer")
     private List<Product> products;
 
+    public Integer getId() {
+        return id;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getCountry() {
+        return country;
+    }
 }

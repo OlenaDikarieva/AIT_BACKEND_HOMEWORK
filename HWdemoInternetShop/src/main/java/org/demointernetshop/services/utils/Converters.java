@@ -110,9 +110,9 @@ public class Converters {
                 .products(order.getOrderItems().stream()
                         .map(Converters::orderItemToProductShortInfoDto)
                         .collect(Collectors.toList()))
-                .orderStatus(order.getOrderStatus().getName())
-                .paymentStatus(order.getPaymentStatus().getName())
-                .paymentMethod(order.getPaymentMethod().getName())
+                .orderStatus(order.getOrderStatus().getStatus())
+                .paymentStatus(order.getPaymentStatus().getStatus())
+                .paymentMethod(order.getPaymentMethod().getMethod())
                 .createData(order.getCreateData())
                 .build();
     }

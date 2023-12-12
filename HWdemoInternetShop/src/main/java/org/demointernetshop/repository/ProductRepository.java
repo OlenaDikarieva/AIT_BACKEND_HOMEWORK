@@ -19,5 +19,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     List<Product> findByCategoryAndManufacturerAndProductInfoPriceBetween(
             Category category, Manufacturer manufacturer, BigDecimal minPrice, BigDecimal maxPrice);
-    ProductQuantityResponseDto findProductQuantity(Integer productId);
+    ProductQuantityResponseDto findProductDtoQuantity(Integer productId);
+    Product findProductById(Integer productId);
 }
+

@@ -22,6 +22,9 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
+    @OneToOne(mappedBy = "product",cascade = CascadeType.ALL, orphanRemoval = true)
+ //   @JoinColumn(name = "productinfo_id")
+    private ProductInfo productInfo;
 
     public Product(Integer id) {
         this.id = id;
